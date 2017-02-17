@@ -1,0 +1,322 @@
+mixin slide(names, slideClasses)
+  if names
+    section(class=names+' '+slideClasses, data-bespoke-backdrop='backdrop ' + names.split(' ').map(function(name) { return 'backdrop--' + name; }).join(' '))
+      block
+  else
+    section
+      block
+
+doctype html
+html
+  head
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+  title Testing For Unicorns
+
+  link(rel='stylesheet', type='text/css', href='build/build.css')
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+
+  body
+
+    article
+
+      +slide('title')
+        h1.gothicfont.smallgothic <span class='important'>Testing</span> <span class='orange'>for</span> <span class='yellowColor'>Unicorns</span>
+        i.green.fa.fa-twitter-square <span class='gothicfont blue' style='font-size:1em; letter-spacing: 0.05em;'>&nbsp;alexsotob &nbsp;</span>
+        aside(role='note') purpose of a test, Readable, easy to understand/purpose, fun, 
+      
+      +slide
+        div.main-wrap
+          div.leftbar
+            h2.gothicfont(style='font-size:2em') Alex Soto
+            br
+            h2.gothicfont.important(style='font-size:1em') Red Hat Engineer
+            h2.gothicfont(style='font-size:1em') Open Source Advocate
+            h2.gothicfont.important(style='font-size:1em') @alexsotob
+            img(src='images/public.png', style="width:40%")
+          div.rightbar
+            img(src='images/family.jpg', style="width:100%")
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('adarise')
+        h2.biggothic.gothicfont Questions
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+          h2.biggothic.gothicfont Assertions
+          aside(role='note') Most of tests have them 
+          div.footer
+            i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+            i.fa.fa-github &nbsp;lordofthejars
+    
+      +slide
+        h2.gothicfont.filegothic JUnit Test
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+            
+        aside(role='note') Should, GivenWhenThen BDD, assertEquals who is expected/actual 
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+    
+      +slide
+        h2.gothicfont.filegothic JUnit Test Refactor
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+        
+        aside(role='note') Not whole picture, navigate
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic JUnit Test Collections
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+        
+        aside(role='note') Snowball
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.biggothic.gothicfont Hamcrest
+        aside(role='note') Improves readibility
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic Hamcrest Test
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note') Developers needs to remember, no IDE
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.biggothic.gothicfont AssertJ
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.biggothic.gothicfont IDE Friendly
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic AssertJ Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic AssertJ Collections Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note') Still Snowball
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic AssertJ Soft Assertions
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note') No repeat
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+   
+      +slide
+        h2.gothicfont.filegothic Things Might Go Wrong
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic Try/Catch
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+          
+      +slide
+        h2.gothicfont.filegothic JUnit
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic JUnit
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic JUnit Rule
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic AssertJ Exceptions
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.smallgothic.underline Benefits of AssertJ
+        ul.lists
+          li IDE friendly
+          li Assertions Generation
+          li Integration with Guava, Joda, DB, Neo4j and Swing
+          
+        aside(role='note') Plugin CLI, Gradle, IDE, Maven
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.biggothic.gothicfont Demo
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.biggothic.gothicfont Don't Sleep
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic Asynchronous Call
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note') Not really a unit test, sleep(500...1000), UI most time
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.biggothic.gothicfont Awaitility
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic Awaitility Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note') With Hamcrest
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic Awaitility Example with AssertJ
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note') 
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic RxJava
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
+
+        aside(role='note') Reactive Extensions for the JVM, unaltered production code without any modification
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.smallgothic.underline Benefits of Awaitility
+
+        ul.lists
+          li Deadlock Detection
+          li Pollings: Fixed, Fibonacci, Iterative, Custom
+          li Simple Library
+
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide('adathink')
+        h2.gothicfont.smallgothic Let's <span class='important'>wind down</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+
+      +slide
+        img.avatar(src='images/profile.jpg')
+        br
+        a(href='http://bit.ly/2gLiXEL', style='border:none')
+          i.fa.fa-slideshare
+          h3 http://bit.ly/2gLiXEL
+          i.fa.fa-envelope
+          h3 asotobu@gmail.com
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+    script(src='build/build.js')
