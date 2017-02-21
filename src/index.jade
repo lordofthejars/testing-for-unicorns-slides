@@ -57,9 +57,49 @@ html
         h2.gothicfont.filegothic JUnit Test
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            @Test
+            public void should_find_composer_by_name() {
+
+                // Given:
+                Composers composers = new Composers();
+
+                // When:
+                final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
+
+                // Then:
+                assertEquals("Name of the composer", "Wolfgang Amadeus Mozart", mozart.getName());
+                assertEquals("Era of the composer", Era.CLASSICAL, mozart.getEra());
+                assertEquals("Birthdate of the composer", LocalDate.of(1756, 1, 27), mozart.getBirthdate());
+                assertEquals("Died date of the composer", LocalDate.of(1791, 12, 5), mozart.getDied());
+
+            }
             
         aside(role='note') Should, GivenWhenThen BDD, assertEquals who is expected/actual 
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+    
+      +slide
+        h2.gothicfont.filegothic JUnit Test Collections
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            @Test
+            public void should_find_operas_by_composer_name() {
+
+                // Given:
+                Composers composers = new Composers();
+
+                // When:
+                final List<Opera> operas = composers.findOperasByComposerName("Wolfgang Amadeus Mozart");
+
+                // Then:
+                assertEquals("Number of Operas", 2, operas.size());
+                assertEquals("Magic Flute Opera", "Die Zauberflöte", operas.get(0).getName());
+                assertEquals("Don Giovanni Opera", "Don Giovanni", operas.get(1).getName());
+
+            }
+            
+        aside(role='note') getters, equals
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -68,20 +108,23 @@ html
         h2.gothicfont.filegothic JUnit Test Refactor
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
-        
-        aside(role='note') Not whole picture, navigate
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
+            @Test
+            public void should_find_operas_by_composer_name_version_2() {
 
-      +slide
-        h2.gothicfont.filegothic JUnit Test Collections
-        pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+                // Given:
+                Composers composers = new Composers();
+
+                // When:
+                final List<Opera> operas = composers.findOperasByComposerName("Wolfgang Amadeus Mozart");
+
+                // Then:
+                assertEquals("Number of Operas", 2, operas.size());
+                assertTrue("Contains All Operas", 
+                                getOperaNames(operas).containsAll(asList("Die Zauberflöte", "Don Giovanni")));
+
+            }
         
-        aside(role='note') Snowball
+        aside(role='note') Not whole picture, navigate, assertTrue
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -97,7 +140,61 @@ html
         h2.gothicfont.filegothic Hamcrest Test
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            import static org.hamcrest.CoreMatchers.equalTo;
+            import static org.hamcrest.CoreMatchers.is;
+            import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
+          
+            @Test
+            public void should_find_composer_by_name() {
+
+                // Given:
+                Composers composers = new Composers();
+
+                // When:
+                final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
+
+                // Then:
+                assertThat(mozart.getName(), is(equalToIgnoringWhiteSpace("Wolfgang Amadeus Mozart")));
+                assertThat(mozart.getEra(), is(equalTo(Era.CLASSICAL)));
+                assertThat(mozart.getBirthdate(), is(equalTo(LocalDate.of(1756, 1, 27))));
+                assertThat(mozart.getDied(), is(equalTo(LocalDate.of(1791, 12, 5))));
+
+            }
+
+        aside(role='note') Developers needs to remember, no IDE
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic Hamcrest Test
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            import static org.hamcrest.CoreMatchers.hasItem;
+            import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+            
+            @Test
+            public void should_find_operas_by_composer_name() {
+
+                // Given:
+                Composers composers = new Composers();
+
+                // When:
+                final List<Opera> operas = composers.findOperasByComposerName("Ludwig van Beethoven");
+
+                // Then:
+                final Opera fidelio = Composers.OperaFactory
+                        .createOpera("Fidelio")
+                        .language(Language.GERMAN)
+                        .librettist("Georg Friedrich Treitschke")
+                        .roles("Florestan", "Leonore", "Rocco")
+                        .build();
+
+                assertThat(operas, hasSize(1));
+                assertThat(getOperaNames(operas), hasItem("Fidelio"));
+                assertThat(operas, hasItem(fidelio));
+
+            }      
 
         aside(role='note') Developers needs to remember, no IDE
         div.footer
@@ -120,7 +217,22 @@ html
         h2.gothicfont.filegothic AssertJ Example
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            import static org.assertj.core.api.Assertions.assertThat;
+            @Test
+            public void should_find_composer_by_name() {
+
+              // Given:
+              Composers composers = new Composers();
+
+              // When:
+              final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
+
+              // Then:
+              assertThat(mozart.getName()).isEqualTo("Wolfgang Amadeus Mozart");
+              assertThat(mozart.getEra()).isEqualTo(Era.CLASSICAL);
+              assertThat(mozart.getBirthdate()).isEqualTo(LocalDate.of(1756, 1, 27));
+              assertThat(mozart.getDied()).isEqualTo(LocalDate.of(1791, 12, 5));
+            }
 
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -130,7 +242,22 @@ html
         h2.gothicfont.filegothic AssertJ Collections Example
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            @Test
+            public void should_find_operas_by_composer_name() {
+
+                // Given:
+                Composers composers = new Composers();
+
+                // When:
+                final List<Opera> operas = composers.findOperasByComposerName("Wolfgang Amadeus Mozart");
+
+                // Then:
+                assertThat(operas)
+                        .hasSize(2)
+                        .extracting(Opera::getName)
+                        .containsExactlyInAnyOrder("Die Zauberflöte", "Don Giovanni");
+
+            }
 
         aside(role='note') Still Snowball
         div.footer
@@ -141,7 +268,23 @@ html
         h2.gothicfont.filegothic AssertJ Soft Assertions
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            @Test
+            public void should_find_composer_by_name_soft_assertions() {
+
+                // Given:
+                Composers composers = new Composers();
+
+                // When:
+                final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
+
+                // Then:
+                SoftAssertions.assertSoftly(softly -> {
+                    softly.assertThat(mozart.getName()).isEqualTo("Wolfgang Amadeus Mozart");
+                    softly.assertThat(mozart.getEra()).isEqualTo(Era.CLASSICAL);
+                    softly.assertThat(mozart.getBirthdate()).isEqualTo(LocalDate.of(1756, 1, 27));
+                    softly.assertThat(mozart.getDied()).isEqualTo(LocalDate.of(1791, 12, 5));
+                 });
+            }
 
         aside(role='note') No repeat
         div.footer
@@ -149,12 +292,8 @@ html
           i.fa.fa-github &nbsp;lordofthejars
    
       +slide
-        h2.gothicfont.filegothic Things Might Go Wrong
-        pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
-
-        aside(role='note')
+        h2.biggothic.gothicfont Things Might Go Wrong
+        aside(role='note') Improves readibility
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -163,9 +302,24 @@ html
         h2.gothicfont.filegothic Try/Catch
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            @Test
+            public void should_throw_exception_if_composer_not_found() {
+                // Given:
+                Composers composers = new Composers();
 
-        aside(role='note')
+                // When:
+                try {
+                    final Composer salieri = composers.findComposerByName("Antonio Salieri");
+                    fail();
+                } catch (IllegalArgumentException e) {
+
+                    // Then:
+                    assertEquals("Composer Antonio Salieri is not found", e.getMessage());
+                }
+
+            }
+
+        aside(role='note') Not beautiful
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -174,20 +328,17 @@ html
         h2.gothicfont.filegothic JUnit
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            @Test(expected = IllegalArgumentException.class)
+            public void should_throw_exception_if_composer_not_found_version_2() {
+                // Given:
+                Composers composers = new Composers();
 
-        aside(role='note')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2.gothicfont.filegothic JUnit
-        pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+                // When:
+                final Composer salieri = composers.findComposerByName("Antonio Salieri");
 
-        aside(role='note')
+            }
+
+        aside(role='note') Not know who throws, nor if it is the real one 
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -196,7 +347,16 @@ html
         h2.gothicfont.filegothic JUnit Rule
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            @Test
+            public void should_throw_exception_if_composer_not_found_version_3() {
+                // Given:
+                Composers composers = new Composers();
+
+                // When:
+                thrown.expect(IllegalArgumentException.class);
+                final Composer salieri = composers.findComposerByName("Antonio Salieri");
+
+            }
 
         aside(role='note')
         div.footer
@@ -207,8 +367,26 @@ html
         h2.gothicfont.filegothic AssertJ Exceptions
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            @Test
+            public void should_throw_exception_if_composer_not_found_version_3() {
+                // Given:
+                Composers composers = new Composers();
 
+                // When:
+                // Then:
+                assertThatThrownBy(() -> composers.findComposerByName("Antonio Salieri"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .withFailMessage("Composer Antonio Salieri is not found");
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            &nbsp;&nbsp;&nbsp;&nbsp;// When:
+            &nbsp;&nbsp;&nbsp;&nbsp;Throwable thrown = catchThrowable(() -> composers.findComposerByName("Antonio Salieri"));
+
+            &nbsp;&nbsp;&nbsp;&nbsp;// Then:
+            &nbsp;&nbsp;&nbsp;&nbsp;assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                              .withFailMessage("Composer Antonio Salieri is not found");
+                                
         aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -242,9 +420,22 @@ html
         h2.gothicfont.filegothic Asynchronous Call
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            @Test
+            public void should_play_operas() throws InterruptedException {
+                // Given:
+                final Opera nozzeDiFigaro = ...;
+                Gramophone gramophone = new Gramophone();
 
-        aside(role='note') Not really a unit test, sleep(500...1000), UI most time
+                // When:
+                gramophone.play(nozzeDiFigaro);
+
+                // Then:
+                TimeUnit.SECONDS.sleep(3);
+                assertThat(gramophone.getCurrentOpera()).isEqualTo(nozzeDiFigaro);
+
+            }
+
+        aside(role='note') Not really a unit test but int. test, sleep(500...1000), UI most time
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -259,31 +450,60 @@ html
         h2.gothicfont.filegothic Awaitility Example
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            @Test
+            public void should_play_operas_version_2() {
+                // Given:
+                final Opera nozzeDiFigaro = Composers.OperaFactory
+                        .createOpera("Le Nozze di Figaro")
+                        .language(Language.ITALIAN)
+                        .librettist("Lorenzo Da Ponte")
+                        .roles("Count Almaviva", "Countess Rosina", "Susanna", "Figaro")
+                        .build();
 
-        aside(role='note') With Hamcrest
+                Gramophone gramophone = new Gramophone();
+
+                // When:
+                gramophone.play(nozzeDiFigaro);
+
+                // Then:
+                await().atMost(5, TimeUnit.SECONDS).until(gramophone::isPlaying);
+                assertThat(gramophone.getCurrentOpera()).isEqualTo(nozzeDiFigaro);
+
+            }
+
+        aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
       
       +slide
-        h2.gothicfont.filegothic Awaitility Example with AssertJ
+        h2.gothicfont.filegothic Completable Future
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
+            import static org.mockito.Mockito.mock;
+            import static org.mockito.Mockito.verify;
+            
+            // public void composersInfoAsync(@Suspended final AsyncResponse asyncResponse, 
+            //                                @PathParam("composer") String composer) {}
+            
+            @Test
+            public void should_get_composer_and_image_async() {
+
+                // Then:
+                given().ignoreExceptions()
+                        .await().atMost(10, TimeUnit.SECONDS)
+                        .until(() -> {
+                                verify(asyncResponse).resume(responseArgumentCaptor.capture());
+                        });
+
+                final ComposersResourceAsync.ComposerInfo composerInfo = responseArgumentCaptor.getValue();
+                assertThat(composerInfo.getUrl())
+                        .hasHost("localhost")
+                        .hasPath("/images/Wolfgang+Amadeus+Mozart.jpg");
+
+            }
 
         aside(role='note') 
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2.gothicfont.filegothic RxJava
-        pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def gradle = load 'jenkins/gradle.groovy'
-
-        aside(role='note') Reactive Extensions for the JVM, unaltered production code without any modification
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -296,6 +516,153 @@ html
           li Pollings: Fixed, Fibonacci, Iterative, Custom
           li Simple Library
 
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.biggothic.gothicfont REST API
+        aside(role='note') REST (Xml, JSon), Move forward to a black box
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic GET /Ludwig+van+Beethoven
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            {
+              "name": "Ludwig van Beethoven",
+              "era": "ROMANTIC",
+              "birthdate": {
+                }
+              },
+              "died": {
+              },
+              "operas": [
+                {
+                  "name": "Fidelio",
+                  "librettist": "Georg Friedrich Treitschke",
+                  "language": "GERMAN",
+                  "roles": [
+                    "Rocco",
+                    "Leonore",
+                    "Florestan"
+                  ]
+                }
+              ]
+            }
+        aside(role='note')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+          
+      +slide
+        h2.gothicfont.filegothic HttpClient Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            @Test
+            public void should_find_composer() throws IOException, URISyntaxException {
+                // Given:
+                URIBuilder uriBuilder = new URIBuilder("http://localhost:8080/");
+                uriBuilder.setPath("Ludwig van Beethoven");
+                
+                // When:
+                final Content bodyContent = Request.Get(uriBuilder.build())
+                        .execute().returnContent();
+
+                String body =  bodyContent.asString();
+
+                // Then:
+                assertThat(body).contains("\"name\":\"Ludwig van Beethoven\"")
+                                .contains("\"librettist\":\"Georg Friedrich Treitschke\"");
+            }
+        
+        aside(role='note')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic WebDriver Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            // Given:
+            WebDriver browser = new FirefoxDriver();
+            URIBuilder uriBuilder = new URIBuilder("http://localhost:8080/");
+            uriBuilder.setPath("Ludwig van Beethoven");
+            
+            browser.navigate().to(uriBuilder.build());
+            assertThat(browser.getPageSource()).contains("\"name\":\"Ludwig van Beethoven\"");
+            
+        aside(role='note') 
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.biggothic.gothicfont REST-assured
+        aside(role='note') Testing and validating REST services
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic REST-assured Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            @Test
+            public void should_find_composer_version_2() {
+                    given()
+                        .when()
+                        .get("{composer}", "Ludwig van Beethoven")
+                        .then()
+                        .assertThat()
+                        .body("name", is("Ludwig van Beethoven"))
+                        .body("operas.size()", is(1))
+                        .body("operas.name", hasItems("Fidelio"));
+            }
+
+        aside(role='note') 
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic REST-assured Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            @Test
+            public void should_find_composer_version_3() {
+                Composer composer = ....;
+                given()
+                        .param("parameter1", "parameterValue")
+                        .body(composer)
+                        .when()
+                        .post()
+                        .then()
+                        .assertThat()
+                        .statusCode(201);
+            }
+            
+        aside(role='note') 
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic REST-assured Request Logging
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            given().log().all(). .. // Log all request specification details including parameters, headers and body
+            given().log().params(). .. // Log only the parameters of the request
+            given().log().body(). .. // Log only the request body
+            given().log().headers(). .. // Log only the request headers
+            given().log().cookies(). .. // Log only the request cookies
+            given().log().method(). .. // Log only the request method
+            given().log().path(). .. // Log only the request path
+            
+        aside(role='note') Chunks of bytes, maybe not useful at all, just debugging
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
