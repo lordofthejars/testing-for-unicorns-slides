@@ -21,18 +21,20 @@ html
     article
 
       +slide('title')
-        h1.gothicfont.smallgothic <span class='important'>Testing</span> <span class='orange'>for</span> <span class='yellowColor'>Unicorns</span>
-        i.green.fa.fa-twitter-square <span class='gothicfont blue' style='font-size:1em; letter-spacing: 0.05em;'>&nbsp;alexsotob &nbsp;</span>
+        h1.gothicfont.presentationtitle <span class='important'>Testing</span> <span class='orange'>for</span> <span class='yellowColor'>Unicorns</span>
         aside(role='note') purpose of a test, Readable, easy to understand/purpose, fun, 
-      
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+          
       +slide
         div.main-wrap
           div.leftbar
-            h2.gothicfont(style='font-size:2em') Alex Soto
+            h2.biofont(style='font-size:2em') Alex Soto
             br
-            h2.gothicfont.important(style='font-size:1em') Red Hat Engineer
-            h2.gothicfont(style='font-size:1em') Open Source Advocate
-            h2.gothicfont.important(style='font-size:1em') @alexsotob
+            h2.biofont.important(style='font-size:1em') Red Hat Engineer
+            h2.biofont(style='font-size:1em') Open Source Advocate
+            h2.biofont.important(style='font-size:1em') @alexsotob
             img(src='images/public.png', style="width:40%")
           div.rightbar
             img(src='images/family.jpg', style="width:100%")
@@ -440,8 +442,8 @@ html
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
       
-      +slide
-        h2.biggothic.gothicfont Awaitility
+      +slide('awaitility')
+        aside(role='note')  Awaitility is a DSL that allows you to express expectations of an asynchronous system
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -600,8 +602,8 @@ html
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
       
-      +slide
-        h2.biggothic.gothicfont REST-assured
+      +slide('restassured')
+        //h2.biggothic.gothicfont REST-assured
         aside(role='note') Testing and validating REST services
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -612,15 +614,15 @@ html
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
             @Test
-            public void should_find_composer_version_2() {
+            public void should_find_composer() {
                     given()
                         .when()
-                        .get("{composer}", "Ludwig van Beethoven")
+                          .get("{composer}", "Ludwig van Beethoven")
                         .then()
-                        .assertThat()
-                        .body("name", is("Ludwig van Beethoven"))
-                        .body("operas.size()", is(1))
-                        .body("operas.name", hasItems("Fidelio"));
+                          .assertThat()
+                            .body("name", is("Ludwig van Beethoven"))
+                            .body("operas.size()", is(1))
+                            .body("operas.name", hasItems("Fidelio"));
             }
 
         aside(role='note') 
@@ -633,14 +635,14 @@ html
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
             @Test
-            public void should_find_composer_version_3() {
+            public void should_insert_composer() {
                 Composer composer = ....;
                 given()
-                        .param("parameter1", "parameterValue")
-                        .body(composer)
-                        .when()
-                        .post()
-                        .then()
+                      .param("parameter1", "parameterValue")
+                      .body(composer)
+                    .when()
+                      .post()
+                      .then()
                         .assertThat()
                         .statusCode(201);
             }
@@ -667,12 +669,213 @@ html
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
       
+      +slide
+        h2.gothicfont.filegothic REST-assured Response Logging
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            get("/x").then().log().ifError()
+            get("/x").then().log().all()
+            given().log().ifValidationFails()
+            get("/x").then().log().ifStatusCodeIsEqualTo(302)
+            given().config(RestAssured.config()
+                                      .logConfig(logConfig().enableLoggingOfRequestAndResponseIfValidationFails())
+                          )
+        
+        aside(role='note') Chunks of bytes, maybe not useful at all, just debugging
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic REST-assured Request Specification
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            RequestSpecBuilder builder = new RequestSpecBuilder();
+            builder.setBaseUri("http://example.com");
+            
+            given().spec(builder.build())...
+        aside(role='note') Reuse same configuration across all requests, expectations, path, root, auth, port, host, params, headers
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic REST-assured Auth
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            given().auth().oauth2(accessToken).when()...
+            given().auth().form("John", "Doe", springSecurity().withCsrfFieldName("_csrf")).when()...
+            given().auth().basic("username", "password").when()...
+        
+        aside(role='note') Basic, Digest, Form, CSRF token, OAUTH, Custom
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.smallgothic.underline More Features
+        ul.lists
+          li Custom Parsers
+          li SSL support (<span class="important">.relaxedHTTPSValidation()</span>)
+          li Filters
+          li JSON Schema Validation
+      
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.biggothic.gothicfont (Micro) Services Dependencies
+        aside(role='note') Test code that connect to 3rd party or internal services
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.smallgothic.underline Problems with Services
+        ul.lists
+          li Network Down
+          li Service Down
+          li Limits on API
+          li Component not in Control
+          li Micro-Services Dependencies Hell
+        
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+    
+      +slide
+        h2.gothicfont.smallgothic.underline Possible Solutions
+        ul.lists
+          li Mock Http Component
+          li Stub/Fake Http Server
+          li Service Virtualization
+        
+        aside(role='note') Mock not full stack, not reflect the reality, it is about your knowledge
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide('matrix')
+        h2.biggothic.gothicfont Service Virtualization
+        
+        aside(role='note') Light Proxy
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        img.schemash(src='images/capturemode.png')
+        aside(role='note') first call nothing real serviceand way back persisted
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        img.schemash(src='images/simulatemode.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide('hoverfly')
+            
+        aside(role='note') Implementation in Go, integrated with Java
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic Hoverfly Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            @ClassRule
+            public static HoverflyRule hoverflyRule = HoverflyRule.inCaptureOrSimulationMode("getcomposers.json");
+
+            @Test
+            public void should_get_composers_from_composers_microservice() throws URISyntaxException, IOException {
+
+               // Given:
+               ComposersGateway composersGateway = new ComposersGateway("192.168.99.100", 8081);
+
+               // When:
+               Composer composer = composersGateway.getComposer("Ludwig van Beethoven");
+
+               // Then:
+               assertThat(composer.getName()).isEqualTo("Ludwig van Beethoven");
+            }  
+        aside(role='note') 
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic Hoverfly File Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            {
+              "data" : {
+                "pairs" : [ {
+                  "request" : {
+                    "path" : "/Ludwig van Beethoven",
+                    "method" : "GET",
+                    "destination" : "192.168.99.100:8081",
+                    ...
+                  }
+                  "response" : {
+                    "status" : 200,
+                    "body" : "{\"name\":\"Ludwig van Beethoven\",}",
+                    "encodedBody" : false,
+                    "headers" : {
+                      "Connection" : [ "keep-alive" ],
+                    ...
+                    }
+                 }
+               }
+             }
+                    
+        aside(role='note') 
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.biggothic.gothicfont Demo
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.biggothic.gothicfont Containers are Burning
+                
+        aside(role='note') Light Proxy
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
       +slide('adathink')
-        h2.gothicfont.smallgothic Let's <span class='important'>wind down</span>
+        h2.gothicfont.biggothic Let's <span class='important'>wind down</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+          
+      +slide
+        h2.gothicfont.smallgothic.underline Conclusions
+        ul.lists
+          li From low-level to high-level
+          li Not just for Micro-Services
+          li Improves Readibility of Tests
+            
+        aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
+      +slide
+        h4 <span class='important'>The purpose</span> of automated testing is to <span class='important'>enable change</span>. <br/> <span class='important'>Verifying</span> correctness is just a nice <span class='important'>side-effect</span>.
+        h3 Jeremy Norris
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
 
       +slide
         img.avatar(src='images/profile.jpg')

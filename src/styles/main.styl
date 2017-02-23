@@ -21,6 +21,11 @@ li.bigfont
  font-size: 2.2em
 
 .gothicfont
+  font-family: 'Roboto'
+  font-weight: bold;
+  font-size: 2em
+
+.biofont
   font-family: 'League Gothic'
   font-weight: bold;
   font-size: 2em
@@ -29,13 +34,17 @@ li.bigfont
   font-size: 1em
 
 .smallgothic
-  font-size: 2.2em
+  font-size: 1.2em
 
 .biggothic
-  font-size: 3.2em
+  font-size: 2.2em
+
+.presentationtitle
+  font-size: 2.0em
+  font-weight: bold
 
 h1
-  font-family: 'League Gothic'
+  font-family: 'Roboto'
   font-weight: bold;
   font-size: 4.2em
 
@@ -196,14 +205,14 @@ pre, code
 
 .backdrop
   &--title
-    background-image: url('../images/microprofile-black.jpg')
-    background-position: 5 0
+    background-image: url('../images/unicornfront.jpg')
+    background-position: 0 0
     background-color: white
-    filter: brightness(100%);
+    filter: brightness(80%);
     background-repeat: no-repeat
-    background-size: 50%
+    background-size: cover
     &.bespoke-backdrop-active
-      opacity: 1
+      opacity: 0.8
   &--swarm
     background-image: url('../images/swarm_logo_final.png')
     background-position: 5 0
@@ -304,8 +313,8 @@ pre, code
     background-size: cover
     &.bespoke-backdrop-active
       opacity: 0.60
-  &--bob
-    background: url('../images/fire-bob.gif')
+  &--matrix
+    background: url('../images/matrix.gif')
     background-size: cover
     &.bespoke-backdrop-active
       opacity: 0.60
@@ -316,13 +325,27 @@ pre, code
     background-repeat: no-repeat
     &.bespoke-backdrop-active
       opacity: 0.5
-  &--serenity
+  &--restassured
     background-color: white
-    background-image: url('../images/serenity.jpeg')
-    background-size: 20%
+    background-image: url('../images/restassured.png')
+    background-size: 25%
     background-repeat: no-repeat
     &.bespoke-backdrop-active
-      opacity: 0.3
+      opacity: 1
+  &--hoverfly
+    background-color: white
+    background-image: url('../images/hoverfly_logo.png')
+    background-size: 25%
+    background-repeat: no-repeat
+    &.bespoke-backdrop-active
+      opacity: 1
+  &--awaitility
+    background-color: white
+    background-image: url('../images/awaitility.png')
+    background-size: 25%
+    background-repeat: no-repeat
+    &.bespoke-backdrop-active
+      opacity: 1
   &--whale
     background: url('../images/whale.jpg') no-repeat center center fixed
     background-size: cover
@@ -423,9 +446,9 @@ pre, code
   &--adathink
     background: url('../images/adathink.jpg') no-repeat center center fixed
     background-size: cover
-    filter: saturate(80%);
+    filter: saturate(75%);
     &.bespoke-backdrop-active
-      opacity: 0.70
+      opacity: 0.65
   &--alexoh
     background: url('../images/alexoh.jpg') no-repeat center center fixed
     background-size: cover
@@ -445,7 +468,7 @@ pre, code
     background: url('../images/adarise.jpg') no-repeat center center fixed
     background-size: cover
     &.bespoke-backdrop-active
-      opacity: 0.80
+      opacity: 0.70
   &--chicken
     background: url('../images/chicken.jpg') no-repeat center center fixed
     background-size: cover
