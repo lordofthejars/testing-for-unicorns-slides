@@ -844,14 +844,76 @@ html
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
       
-      +slide
-        h2.biggothic.gothicfont Containers are Burning
+      +slide('burncontainer')
+        h2.biggothic.gothicfont Containers are <span class='important'>Burning</span>
                 
         aside(role='note') Light Proxy
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
       
+      +slide
+        h2.gothicfont.filegothic Testing Containers
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            //assuming Dockerfile or docker-compose already created
+            docker build -t myorg/myservice:1.0.0 .
+            docker run --rm -ti -p 8080:8080 myorg/myservice:1.0.0
+            
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            docker-compose up
+          
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            // Run your test IDE or build tool
+            mvn clean test
+          
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            docker-compose stop
+      
+      
+        aside(role='note') manual step, although build tool or script not natural to developer, not debug, select exactly test method, IP problems (multiple users)
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide('arquilliancube')
+                
+        aside(role='note') JUnit extension, manages everything, suite level, method level, connect to existing, parallel, IP
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic Arquillian Cube Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            @RunWith(Arquillian.class)
+            public class PingPongTest {
+
+                @ArquillianResource
+                @DockerUrl(containerName = "helloworld", exposedPort = 8080)
+                RequestSpecBuilder requestSpecBuilder;
+
+                @Test
+                public void should_receive_ok_message() throws MalformedURLException, InterruptedException {
+                    RestAssured
+                        .given()
+                        .spec(requestSpecBuilder.build())
+                        .when()
+                        .get()
+                        .then()
+                        .assertThat().body("status", equalTo("OK"));
+                }
+
+            }
+            
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+            
       +slide('adathink')
         h2.gothicfont.biggothic Let's <span class='important'>wind down</span>
         div.footer
