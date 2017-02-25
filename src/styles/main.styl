@@ -213,50 +213,14 @@ pre, code
     background-size: cover
     &.bespoke-backdrop-active
       opacity: 0.8
-  &--swarm
-    background-image: url('../images/swarm_logo_final.png')
-    background-position: 5 0
-    background-color: white
-    filter: brightness(100%);
-    background-repeat: no-repeat
-    background-size: 50%
-    &.bespoke-backdrop-active
-      opacity: 1
-  &--ibm
-    background-image: url('../images/ibm.png')
-    background-position: 5 0
-    background-color: white
-    filter: brightness(100%);
-    background-repeat: no-repeat
-    background-size: 35%
-    &.bespoke-backdrop-active
-      opacity: 1
 
-  &--payara
-    background-image: url('../images/payara.jpg')
-    background-position: 5 0
-    background-color: white
-    filter: brightness(100%);
-    background-repeat: no-repeat
-    background-size: 35%
-    &.bespoke-backdrop-active
-      opacity: 1
-
-  &--tomitribe
-    background-image: url('../images/tomitribe.png')
-    background-position: 5 0
-    background-color: white
-    filter: brightness(100%);
-    background-repeat: no-repeat
-    background-size: 30%
-    &.bespoke-backdrop-active
-      opacity: 1
-
-  &--speed
-    background: url('../images/speed.jpg')
+  &--sleep
+    background: url('../images/aixasleep.jpg')
     background-size: cover
+    background-position: 0 0
+    filter: brightness(120%)
     &.bespoke-backdrop-active
-      opacity: 0.40
+      opacity: 1
   &--contract
     background: url('../images/contract.jpg')
     background-size: cover
@@ -293,21 +257,23 @@ pre, code
     background-size: cover
     &.bespoke-backdrop-active
       opacity: 0.4
-  &--puzzle
-    background: url('../images/puzzle.jpg') no-repeat center center fixed
+  &--kari
+    background: url('../images/kari.jpg') no-repeat center center fixed
     background-size: cover
     &.bespoke-backdrop-active
-      opacity: 0.5
-  &--orch
-    background: url('../images/orch.jpg') no-repeat center center fixed
+      opacity: 0.6
+  &--eriso
+    background: url('../images/eriso.jpg') no-repeat center center fixed
     background-size: cover
+    background-position: 0 0
     &.bespoke-backdrop-active
-      opacity: 0.5
-  &--ci
-    background: url('../images/ci.jpg') no-repeat center center fixed
+      opacity: 0.6
+  &--onion
+    background: url('../images/onion.jpg') no-repeat center center fixed
     background-size: cover
+    background-position: 0 0
     &.bespoke-backdrop-active
-      opacity: 0.40
+      opacity: 0.80
   &--direction
     background: url('../images/cacauet.jpg') no-repeat center center fixed
     background-size: cover
@@ -317,19 +283,19 @@ pre, code
     background: url('../images/matrix.gif')
     background-size: cover
     &.bespoke-backdrop-active
-      opacity: 0.60
+      opacity: 0.9
   &--burncontainer
     background: url('../images/burncontainer.gif')
     background-size: cover
     &.bespoke-backdrop-active
-      opacity: 0.45
-  &--docker
+      opacity: 0.8
+  &--train
     background-color: white
-    background-image: url('../images/docker.png')
-    background-size: 20%
+    background-image: url('../images/train.jpg')
+    background-size: 100%
     background-repeat: no-repeat
     &.bespoke-backdrop-active
-      opacity: 0.5
+      opacity: 0.7
   &--restassured
     background-color: white
     background-image: url('../images/restassured.png')
@@ -397,8 +363,9 @@ pre, code
   &--rest
     background: url('../images/rest.jpg') no-repeat center center fixed
     background-size: cover
+    background-position: 1 0
     &.bespoke-backdrop-active
-      opacity: 0.60
+      opacity: 1
   &--version
     background: url('../images/version.jpg') no-repeat center center fixed
     background-size: cover
@@ -453,14 +420,14 @@ pre, code
     background-size: cover
     filter: saturate(75%);
     &.bespoke-backdrop-active
-      opacity: 0.65
+      opacity: 0.85
   &--alexoh
     background: url('../images/alexoh.jpg') no-repeat center center fixed
     background-size: cover
     &.bespoke-backdrop-active
       opacity: 0.50
-  &--alexband
-    background: url('../images/alexband.jpg') no-repeat center center fixed
+  &--network
+    background: url('../images/network.jpg') no-repeat center center fixed
     background-size: cover
     &.bespoke-backdrop-active
       opacity: 1
@@ -483,18 +450,6 @@ pre, code
     background-image: url('../images/end.jpg')
     &.bespoke-backdrop-active
       opacity: 0.65
-  &--angularjs
-    background-color: white
-    background-image: url('../images/angularjs.png')
-    background-size: 30%
-    background-repeat: no-repeat
-    transition-delay: 1s
-    &.bespoke-backdrop-active
-      opacity: 0.15
-    &.bespoke-backdrop-after
-      transition-delay: 0s
-    &.bespoke-backdrop-before
-      transition-delay: 2s
   &--yellow
     background: #D2D22E
     &.bespoke-backdrop-active
@@ -557,7 +512,8 @@ pre, code
   color: orange
 
 .background-title
-  background-color: rgba(250,250,250,0.6);
+  background-color: rgba(0,0,0,0.5);
+  width: 100%
 
 .title-single-words
     word-spacing: 9999px
