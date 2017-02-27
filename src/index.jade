@@ -22,7 +22,7 @@ html
 
       +slide('title')
         h1.gothicfont.presentationtitle <span class='important'>Testing</span> <span class='orange'>for</span> <span class='yellowColor'>Unicorns</span>
-        aside(role='note') purpose of a test, Readable, easy to understand/purpose, fun, 
+        aside(role='note') Readable, easy to understand/purpose, fun, About composers
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -58,7 +58,7 @@ html
       +slide
         h2.gothicfont.filegothic JUnit Test
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_find_composer_by_name() {
 
@@ -69,64 +69,14 @@ html
                 final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
 
                 // Then:
-                assertEquals("Name of the composer", "Wolfgang Amadeus Mozart", mozart.getName());
-                assertEquals("Era of the composer", Era.CLASSICAL, mozart.getEra());
-                assertEquals("Birthdate of the composer", LocalDate.of(1756, 1, 27), mozart.getBirthdate());
-                assertEquals("Died date of the composer", LocalDate.of(1791, 12, 5), mozart.getDied());
+                assertEquals("Wolfgang Amadeus Mozart", mozart.getName());
+                assertEquals(Era.CLASSICAL, mozart.getEra());
+                assertEquals(LocalDate.of(1756, 1, 27), mozart.getBirthdate());
+                assertEquals(LocalDate.of(1791, 12, 5), mozart.getDied());
 
             }
             
-        aside(role='note') Should, GivenWhenThen BDD, assertEquals who is expected/actual 
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-    
-      +slide
-        h2.gothicfont.filegothic JUnit Test Collections
-        pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            @Test
-            public void should_find_operas_by_composer_name() {
-
-                // Given:
-                Composers composers = new Composers();
-
-                // When:
-                final List<Opera> operas = composers.findOperasByComposerName("Wolfgang Amadeus Mozart");
-
-                // Then:
-                assertEquals("Number of Operas", 2, operas.size());
-                assertEquals("Magic Flute Opera", "Die Zauberflöte", operas.get(0).getName());
-                assertEquals("Don Giovanni Opera", "Don Giovanni", operas.get(1).getName());
-
-            }
-            
-        aside(role='note') getters, equals, Snowball
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-    
-      +slide
-        h2.gothicfont.filegothic JUnit Test Refactor
-        pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            @Test
-            public void should_find_operas_by_composer_name_version_2() {
-
-                // Given:
-                Composers composers = new Composers();
-
-                // When:
-                final List<Opera> operas = composers.findOperasByComposerName("Wolfgang Amadeus Mozart");
-
-                // Then:
-                assertEquals("Number of Operas", 2, operas.size());
-                assertTrue("Contains All Operas", 
-                                getOperaNames(operas).containsAll(asList("Die Zauberflöte", "Don Giovanni")));
-
-            }
-        
-        aside(role='note') Not whole picture, navigate, assertTrue
+        aside(role='note') Should, GivenWhenThen BDD, assertEquals who is expected/actual, Snowball
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -141,7 +91,7 @@ html
       +slide
         h2.gothicfont.filegothic Hamcrest Test
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             import static org.hamcrest.CoreMatchers.equalTo;
             import static org.hamcrest.CoreMatchers.is;
             import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
@@ -171,31 +121,26 @@ html
       +slide
         h2.gothicfont.filegothic Hamcrest Test
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             import static org.hamcrest.CoreMatchers.hasItem;
             import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
             
             @Test
             public void should_find_operas_by_composer_name() {
-
                 // Given:
                 Composers composers = new Composers();
-
                 // When:
                 final List<Opera> operas = composers.findOperasByComposerName("Ludwig van Beethoven");
 
                 // Then:
                 final Opera fidelio = Composers.OperaFactory
                         .createOpera("Fidelio")
-                        .language(Language.GERMAN)
-                        .librettist("Georg Friedrich Treitschke")
-                        .roles("Florestan", "Leonore", "Rocco")
-                        .build();
-
+                        .language(Language.GERMAN).librettist("Georg Friedrich Treitschke")
+                        .roles("Florestan", "Leonore", "Rocco").build();
+                        
                 assertThat(operas, hasSize(1));
                 assertThat(getOperaNames(operas), hasItem("Fidelio"));
                 assertThat(operas, hasItem(fidelio));
-
             }      
 
         aside(role='note') Developers needs to remember, no IDE, depends on equals, snowball
@@ -213,7 +158,7 @@ html
       +slide
         h2.gothicfont.filegothic AssertJ Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             import static org.assertj.core.api.Assertions.assertThat;
             @Test
             public void should_find_composer_by_name() {
@@ -238,7 +183,7 @@ html
       +slide
         h2.gothicfont.filegothic AssertJ Collections Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_find_operas_by_composer_name() {
 
@@ -264,7 +209,7 @@ html
       +slide
         h2.gothicfont.filegothic AssertJ Soft Assertions
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_find_composer_by_name_soft_assertions() {
 
@@ -298,7 +243,7 @@ html
       +slide
         h2.gothicfont.filegothic Try/Catch
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_throw_exception_if_composer_not_found() {
                 // Given:
@@ -324,7 +269,7 @@ html
       +slide
         h2.gothicfont.filegothic JUnit
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test(expected = IllegalArgumentException.class)
             public void should_throw_exception_if_composer_not_found_version_2() {
                 // Given:
@@ -343,7 +288,11 @@ html
       +slide
         h2.gothicfont.filegothic JUnit Rule
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
+
+            @Rule
+            public ExpectedException thrown = ExpectedException.none();
+          
             @Test
             public void should_throw_exception_if_composer_not_found_version_3() {
                 // Given:
@@ -363,7 +312,7 @@ html
       +slide
         h2.gothicfont.filegothic AssertJ Exceptions
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_throw_exception_if_composer_not_found_version_3() {
                 // Given:
@@ -376,7 +325,7 @@ html
                         .withFailMessage("Composer Antonio Salieri is not found");
 
           br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.code-font.
             &nbsp;&nbsp;&nbsp;&nbsp;// When:
             &nbsp;&nbsp;&nbsp;&nbsp;Throwable thrown = catchThrowable(() -> composers.findComposerByName("Antonio Salieri"));
 
@@ -409,6 +358,7 @@ html
       
       +slide('sleep')
         h2.biggothic.gothicfont.background-title Don't Sleep
+        aside(role='note') Not really a unit test but int. test, sleep(500...1000), UI most time
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -416,7 +366,7 @@ html
       +slide
         h2.gothicfont.filegothic Asynchronous Call
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_play_operas() throws InterruptedException {
                 // Given:
@@ -432,7 +382,6 @@ html
 
             }
 
-        aside(role='note') Not really a unit test but int. test, sleep(500...1000), UI most time
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -446,14 +395,13 @@ html
       +slide
         h2.gothicfont.filegothic Awaitility Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_play_operas_version_2() {
                 // Given:
                 final Opera nozzeDiFigaro = Composers.OperaFactory
                         .createOpera("Le Nozze di Figaro")
-                        .language(Language.ITALIAN)
-                        .librettist("Lorenzo Da Ponte")
+                        .language(Language.ITALIAN).librettist("Lorenzo Da Ponte")
                         .roles("Count Almaviva", "Countess Rosina", "Susanna", "Figaro")
                         .build();
 
@@ -476,7 +424,7 @@ html
       +slide
         h2.gothicfont.filegothic JAX-RS Async
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             import static org.mockito.Mockito.mock;
             import static org.mockito.Mockito.verify;
             
@@ -485,7 +433,6 @@ html
             
             @Test
             public void should_get_composer_and_image_async() {
-
                 // Then:
                 given().ignoreExceptions()
                         .await().atMost(10, TimeUnit.SECONDS)
@@ -494,13 +441,12 @@ html
                         });
 
                 final ComposersResourceAsync.ComposerInfo composerInfo = responseArgumentCaptor.getValue();
-                assertThat(composerInfo.getUrl())
-                        .hasHost("localhost")
+                assertThat(composerInfo.getImageUrl()).hasHost("localhost")
                         .hasPath("/images/Wolfgang+Amadeus+Mozart.jpg");
 
             }
 
-        aside(role='note') 
+        aside(role='note') can mock
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -527,7 +473,7 @@ html
       +slide
         h2.gothicfont.filegothic GET /Ludwig+van+Beethoven
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             {
               "name": "Ludwig van Beethoven",
               "era": "ROMANTIC",
@@ -557,7 +503,7 @@ html
       +slide
         h2.gothicfont.filegothic HttpClient Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_find_composer() throws IOException, URISyntaxException {
                 // Given:
@@ -583,7 +529,7 @@ html
       +slide
         h2.gothicfont.filegothic WebDriver Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             // Given:
             WebDriver browser = new FirefoxDriver();
             URIBuilder uriBuilder = new URIBuilder("http://localhost:8080/");
@@ -598,7 +544,6 @@ html
           i.fa.fa-github &nbsp;lordofthejars
       
       +slide('restassured')
-        //h2.biggothic.gothicfont REST-assured
         aside(role='note') Testing and validating REST services
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -607,7 +552,7 @@ html
       +slide
         h2.gothicfont.filegothic REST-assured Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_find_composer() {
                     given()
@@ -620,7 +565,7 @@ html
                             .body("operas.name", hasItems("Fidelio"));
             }
 
-        aside(role='note') 
+        aside(role='note') GPath
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -628,7 +573,7 @@ html
       +slide
         h2.gothicfont.filegothic REST-assured Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @Test
             public void should_insert_composer() {
                 Composer composer = ....;
@@ -650,8 +595,8 @@ html
       +slide
         h2.gothicfont.filegothic REST-assured Request Logging
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            given().log().all(). .. // Log all request specification details including parameters, headers and body
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
+            given().log().all(). .. // Log all request specification details including parameters, headers, body
             given().log().params(). .. // Log only the parameters of the request
             given().log().body(). .. // Log only the request body
             given().log().headers(). .. // Log only the request headers
@@ -667,7 +612,7 @@ html
       +slide
         h2.gothicfont.filegothic REST-assured Response Logging
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             get("/x").then().log().ifError()
             get("/x").then().log().all()
             given().log().ifValidationFails()
@@ -676,7 +621,7 @@ html
                                       .logConfig(logConfig().enableLoggingOfRequestAndResponseIfValidationFails())
                           )
         
-        aside(role='note') Chunks of bytes, maybe not useful at all, just debugging
+        aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -684,7 +629,7 @@ html
       +slide
         h2.gothicfont.filegothic REST-assured Request Specification
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             RequestSpecBuilder builder = new RequestSpecBuilder();
             builder.setBaseUri("http://example.com");
             
@@ -697,7 +642,7 @@ html
       +slide
         h2.gothicfont.filegothic REST-assured Auth
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             given().auth().oauth2(accessToken).when()...
             given().auth().form("John", "Doe", springSecurity().withCsrfFieldName("_csrf")).when()...
             given().auth().basic("username", "password").when()...
@@ -782,7 +727,7 @@ html
       +slide
         h2.gothicfont.filegothic Hoverfly Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @ClassRule
             public static HoverflyRule hoverflyRule = HoverflyRule.inCaptureOrSimulationMode("getcomposers.json");
 
@@ -806,7 +751,7 @@ html
       +slide
         h2.gothicfont.filegothic Hoverfly File Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             {
               "data" : {
                 "pairs" : [ {
@@ -850,7 +795,7 @@ html
       +slide
         h2.gothicfont.filegothic Testing Containers
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             //assuming Dockerfile or docker-compose already created
             docker build -t myorg/myservice:1.0.0 .
             docker run --rm -ti -p 8080:8080 myorg/myservice:1.0.0
@@ -884,16 +829,16 @@ html
       +slide
         h2.gothicfont.filegothic Arquillian Cube Example
         pre.small.language-javascript
-          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             @RunWith(Arquillian.class)
-            public class PingPongTest {
+            public class HelloWorldTest {
 
                 @ArquillianResource
                 @DockerUrl(containerName = "helloworld", exposedPort = 8080)
                 RequestSpecBuilder requestSpecBuilder;
 
                 @Test
-                public void should_receive_ok_message() throws MalformedURLException, InterruptedException {
+                public void should_receive_ok_message() {
                     RestAssured
                         .given()
                         .spec(requestSpecBuilder.build())
@@ -905,6 +850,30 @@ html
 
             }
             
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic Arquillian Cube K8s Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
+            public class HelloWorldTest {
+
+              @ArquillianResource
+              KubernetesClient client;
+
+              @Named("hello-world-service")
+              @PortForward
+              @ArquillianResource
+              URL url;
+              
+              @Test
+              public void testRunningPodStaysUp() throws Exception {
+                assertThat(client).deployments().pods().isPodReadyForPeriod();
+              }
+        
+        aside(role='note') Ready within a time period (30 seconds by default), then that the pod keeps being Ready for a period (defaults to 10 seconds).      
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
