@@ -76,7 +76,7 @@ html
 
             }
             
-        aside(role='note') Should, GivenWhenThen BDD, assertEquals who is expected/actual, Snowball
+        aside(role='note') Should, GivenWhenThen BDD, assertEquals and collections, Snowball
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -162,7 +162,6 @@ html
             import static org.assertj.core.api.Assertions.assertThat;
             @Test
             public void should_find_composer_by_name() {
-
               // Given:
               Composers composers = new Composers();
 
@@ -170,10 +169,16 @@ html
               final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
 
               // Then:
-              assertThat(mozart.getName()).isEqualTo("Wolfgang Amadeus Mozart");
-              assertThat(mozart.getEra()).isEqualTo(Era.CLASSICAL);
-              assertThat(mozart.getBirthdate()).isEqualTo(LocalDate.of(1756, 1, 27));
-              assertThat(mozart.getDied()).isEqualTo(LocalDate.of(1791, 12, 5));
+              assertThat(mozart.getName())
+                      .isEqualTo("Wolfgang Amadeus Mozart");
+              assertThat(mozart.getBirthdate())
+                      .isEqualTo(LocalDate.of(1756, 1, 27));
+                      
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.code-font.
+            &nbsp;&nbsp;assertThat(mozart).isEqualToComparingFieldByField(expectedMozart);
+            &nbsp;&nbsp;assertThat(mozart).isEqualToIgnoringNullFields(expectedMozart);
+                      
             }
 
         div.footer
