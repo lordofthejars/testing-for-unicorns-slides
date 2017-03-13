@@ -26,7 +26,7 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         div.main-wrap
           div.leftbar
@@ -50,11 +50,11 @@ html
 
       +slide('kari')
           h2.biggothic.gothicfont.background-title Assertions
-          aside(role='note') Most of tests have them 
+          aside(role='note') Most of tests have them
           div.footer
             i.fa.fa-twitter &nbsp;alexsotob&nbsp;
             i.fa.fa-github &nbsp;lordofthejars
-    
+
       +slide
         h2.gothicfont.filegothic JUnit Test
         pre.small.language-javascript
@@ -75,7 +75,7 @@ html
                 assertEquals(LocalDate.of(1791, 12, 5), mozart.getDied());
 
             }
-            
+
         aside(role='note') Should, GivenWhenThen BDD, assertEquals and collections, Snowball
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -95,7 +95,7 @@ html
             import static org.hamcrest.CoreMatchers.equalTo;
             import static org.hamcrest.CoreMatchers.is;
             import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
-          
+
             @Test
             public void should_find_composer_by_name() {
 
@@ -113,7 +113,7 @@ html
 
             }
 
-        aside(role='note') 
+        aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -124,7 +124,7 @@ html
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             import static org.hamcrest.CoreMatchers.hasItem;
             import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-            
+
             @Test
             public void should_find_operas_by_composer_name() {
                 // Given:
@@ -137,11 +137,11 @@ html
                         .createOpera("Fidelio")
                         .language(Language.GERMAN).librettist("Georg Friedrich Treitschke")
                         .roles("Florestan", "Leonore", "Rocco").build();
-                        
+
                 assertThat(operas, hasSize(1));
                 assertThat(getOperaNames(operas), hasItem("Fidelio"));
                 assertThat(operas, hasItem(fidelio));
-            }      
+            }
 
         aside(role='note') Developers needs to remember, no IDE, depends on equals, snowball
         div.footer
@@ -173,12 +173,12 @@ html
                       .isEqualTo("Wolfgang Amadeus Mozart");
               assertThat(mozart.getBirthdate())
                       .isEqualTo(LocalDate.of(1756, 1, 27));
-                      
+
           br
           code.bullet.bespoke-bullet.bespoke-bullet-inactive.code-font.
             &nbsp;&nbsp;assertThat(mozart).isEqualToComparingFieldByField(expectedMozart);
             &nbsp;&nbsp;assertThat(mozart).isEqualToIgnoringNullFields(expectedMozart);
-                      
+
             }
 
         div.footer
@@ -237,7 +237,7 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-   
+
       +slide('eriso')
         h2.biggothic.gothicfont.background-title Things Go Wrong
         aside(role='note') Improves readibility
@@ -270,7 +270,7 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         h2.gothicfont.filegothic JUnit
         pre.small.language-javascript
@@ -289,7 +289,7 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic JUnit Rule
         pre.small.language-javascript
@@ -297,7 +297,7 @@ html
 
             @Rule
             public ExpectedException thrown = ExpectedException.none();
-          
+
             @Test
             public void should_throw_exception_if_composer_not_found_version_3() {
                 // Given:
@@ -313,7 +313,7 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic AssertJ Exceptions
         pre.small.language-javascript
@@ -337,37 +337,31 @@ html
             &nbsp;&nbsp;&nbsp;&nbsp;// Then:
             &nbsp;&nbsp;&nbsp;&nbsp;assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
                               .withFailMessage("Composer Antonio Salieri is not found");
-                                
+
         aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.smallgothic.underline Benefits of AssertJ
         ul.lists
           li IDE friendly
           li Assertions Generation
           li Integration with Guava, Joda, DB, Neo4j and Swing
-          
+
         aside(role='note') Plugin CLI, Gradle, IDE, Maven
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2.biggothic.gothicfont Demo
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('sleep')
         h2.biggothic.gothicfont.background-title Don't Sleep
         aside(role='note') Not really a unit test but int. test, sleep(500...1000), UI most time
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic Asynchronous Call
         pre.small.language-javascript
@@ -390,13 +384,13 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('awaitility')
         aside(role='note')  Awaitility is a DSL that allows you to express expectations of an asynchronous system
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic Awaitility Example
         pre.small.language-javascript
@@ -425,17 +419,17 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic JAX-RS Async
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             import static org.mockito.Mockito.mock;
             import static org.mockito.Mockito.verify;
-            
-            // public void composersInfoAsync(@Suspended final AsyncResponse asyncResponse, 
+
+            // public void composersInfoAsync(@Suspended final AsyncResponse asyncResponse,
             //                                @PathParam("composer") String composer) {}
-            
+
             @Test
             public void should_get_composer_and_image_async() {
                 // Then:
@@ -455,7 +449,7 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.smallgothic.underline Benefits of Awaitility
 
@@ -467,14 +461,14 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('rest')
         h2.biggothic.gothicfont.background-title REST API
         aside(role='note') REST (Xml, JSon), Move forward to a black box
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic GET /Ludwig+van+Beethoven
         pre.small.language-javascript
@@ -504,7 +498,7 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         h2.gothicfont.filegothic HttpClient Example
         pre.small.language-javascript
@@ -514,7 +508,7 @@ html
                 // Given:
                 URIBuilder uriBuilder = new URIBuilder("http://localhost:8080/");
                 uriBuilder.setPath("Ludwig van Beethoven");
-                
+
                 // When:
                 final Content bodyContent = Request.Get(uriBuilder.build())
                         .execute().returnContent();
@@ -525,12 +519,12 @@ html
                 assertThat(body).contains("\"name\":\"Ludwig van Beethoven\"")
                                 .contains("\"librettist\":\"Georg Friedrich Treitschke\"");
             }
-        
+
         aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic WebDriver Example
         pre.small.language-javascript
@@ -539,21 +533,21 @@ html
             WebDriver browser = new FirefoxDriver();
             URIBuilder uriBuilder = new URIBuilder("http://localhost:8080/");
             uriBuilder.setPath("Ludwig van Beethoven");
-            
+
             browser.navigate().to(uriBuilder.build());
             assertThat(browser.getPageSource()).contains("\"name\":\"Ludwig van Beethoven\"");
-            
-        aside(role='note') 
+
+        aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('restassured')
         aside(role='note') Testing and validating REST services
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic REST-assured Example
         pre.small.language-javascript
@@ -574,7 +568,7 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic REST-assured Example
         pre.small.language-javascript
@@ -591,12 +585,12 @@ html
                         .assertThat()
                         .statusCode(201);
             }
-            
-        aside(role='note') 
+
+        aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic REST-assured Request Logging
         pre.small.language-javascript
@@ -608,12 +602,12 @@ html
             given().log().cookies(). .. // Log only the request cookies
             given().log().method(). .. // Log only the request method
             given().log().path(). .. // Log only the request path
-            
+
         aside(role='note') Chunks of bytes, maybe not useful at all, just debugging
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic REST-assured Response Logging
         pre.small.language-javascript
@@ -625,25 +619,25 @@ html
             given().config(RestAssured.config()
                                       .logConfig(logConfig().enableLoggingOfRequestAndResponseIfValidationFails())
                           )
-        
+
         aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic REST-assured Request Specification
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
             RequestSpecBuilder builder = new RequestSpecBuilder();
             builder.setBaseUri("http://example.com");
-            
+
             given().spec(builder.build())...
         aside(role='note') Reuse same configuration across all requests, expectations, path, root, auth, port, host, params, headers
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic REST-assured Auth
         pre.small.language-javascript
@@ -651,12 +645,12 @@ html
             given().auth().oauth2(accessToken).when()...
             given().auth().form("John", "Doe", springSecurity().withCsrfFieldName("_csrf")).when()...
             given().auth().basic("username", "password").when()...
-        
+
         aside(role='note') Basic, Digest, Form, CSRF token, OAUTH, Custom
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.smallgothic.underline More Features
         ul.lists
@@ -664,18 +658,18 @@ html
           li SSL support (<span class="important">.relaxedHTTPSValidation()</span>)
           li Filters
           li JSON Schema Validation
-      
+
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('ants')
         h2.biggothic.gothicfont.background-title (Micro) Services Dependencies
         aside(role='note') Test code that connect to 3rd party or internal services
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.smallgothic.underline Problems with Services
         ul.lists
@@ -684,51 +678,51 @@ html
           li Limits on API
           li Component not in Control
           li Micro-Services Dependencies Hell
-        
+
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-    
+
       +slide
         h2.gothicfont.smallgothic.underline Possible Solutions
         ul.lists
           li Mock Http Component
           li Stub/Fake Http Server
           li Service Virtualization
-        
+
         aside(role='note') Mock not full stack, not reflect the reality, it is about your knowledge
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('matrix')
         h2.biggothic.gothicfont.background-title Service Virtualization
-        
+
         aside(role='note') Light Proxy
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         img.schemash(src='images/capturemode.png')
         aside(role='note') first call nothing real service and way back persisted
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         img.schemash(src='images/simulatemode.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('hoverfly')
-            
+
         aside(role='note') Implementation in Go, integrated with Java, connection proxy modification
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic Hoverfly Example
         pre.small.language-javascript
@@ -747,12 +741,12 @@ html
 
                // Then:
                assertThat(composer.getName()).isEqualTo("Ludwig van Beethoven");
-            }  
-        aside(role='note') 
+            }
+        aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic Hoverfly File Example
         pre.small.language-javascript
@@ -777,26 +771,20 @@ html
                  }
                }
              }
-                    
-        aside(role='note') 
+
+        aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2.biggothic.gothicfont Demo
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('burncontainer')
         h2.biggothic.gothicfont.background-title Containers are <span class='important'>Burning</span>
-                
+
         aside(role='note') Light Proxy
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic Testing Containers
         pre.small.language-javascript
@@ -804,33 +792,33 @@ html
             //assuming Dockerfile or docker-compose already created
             docker build -t myorg/myservice:1.0.0 .
             docker run --rm -ti -p 8080:8080 myorg/myservice:1.0.0
-            
+
           br
           code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             docker-compose up
-          
+
           br
           code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             // Run your test IDE or build tool
             mvn clean test
-          
+
           br
           code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             docker-compose stop
-      
-      
+
+
         aside(role='note') manual step, although build tool or script not natural to developer, not debug, select exactly test method, IP problems (multiple users)
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('arquilliancube')
-                
+
         aside(role='note') JUnit extension, manages everything, suite level, method level, connect to existing, parallel, IP
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic Arquillian Cube Example
         pre.small.language-javascript
@@ -854,11 +842,11 @@ html
                 }
 
             }
-            
+
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic Arquillian Cube K8s Example
         pre.small.language-javascript
@@ -872,30 +860,30 @@ html
               @PortForward
               @ArquillianResource
               URL url;
-              
+
               @Test
               public void testRunningPodStaysUp() throws Exception {
                 assertThat(client).deployments().pods().isPodReadyForPeriod();
               }
-        
-        aside(role='note') Ready within a time period (30 seconds by default), then that the pod keeps being Ready for a period (defaults to 10 seconds).      
+
+        aside(role='note') Ready within a time period (30 seconds by default), then that the pod keeps being Ready for a period (defaults to 10 seconds).
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-            
+
       +slide('adathink')
         h2.gothicfont.biggothic.background-title Let's <span class='important'>wind down</span>
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         h2.gothicfont.smallgothic.underline Conclusions
         ul.lists
           li From low-level to high-level
           li Not just for Micro-Services
           li Improves Readibility of Tests
-            
+
         aside(role='note')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
