@@ -836,7 +836,6 @@ html
                         .then()
                         .assertThat().body("status", equalTo("OK"));
                 }
-
             }
 
         div.footer
@@ -844,9 +843,34 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
+        h2.gothicfont.filegothic Arquillian Cube Example
+        pre.small.language-javascript
+          code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
+            @RunWith(Arquillian.class)
+            public class HelloWorldTest {
+              @DockerContainer
+              Container pingpong = Container.withContainerName("pingpong")
+                                      .fromImage("jonmorehouse/ping-pong")
+                                      .withPortBinding(8080)
+                                      .build();
+
+              @Test
+              public void should_return_ok_as_pong() throws IOException {
+                 String response = ping(pingpong.getIpAddress(), pingpong.getBindPort(8080));
+                  assertThat(response).containsSequence("OK");
+              }
+            }
+
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+
+      +slide
         h2.gothicfont.filegothic Arquillian Cube K8s Example
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
+            @RunWith(Arquillian.class)
             public class HelloWorldTest {
 
               @ArquillianResource
@@ -861,6 +885,7 @@ html
               public void testRunningPodStaysUp() throws Exception {
                 assertThat(client).deployments().pods().isPodReadyForPeriod();
               }
+            }
 
         aside(role='note') Ready within a time period (30 seconds by default), then that the pod keeps being Ready for a period (defaults to 10 seconds).
         div.footer
