@@ -79,7 +79,7 @@ html
 
       +slide('onion')
         h2.biggothic.gothicfont.background-title Hamcrest
-        aside(role='note') Improves readibility
+        aside(role='note') Improves readibility, onion
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -353,7 +353,7 @@ html
 
       +slide('sleep')
         h2.biggothic.gothicfont.background-title Don't Sleep
-        aside(role='note') Not really a unit test but int. test, sleep(500...1000), UI most time
+        aside(role='note') Not really a unit test but int. test, sleep(500...1000), UI most time, JMS, reactive
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -625,6 +625,9 @@ html
         h2.gothicfont.filegothic REST-assured Request Specification
         pre.small.language-javascript
           code.code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.code-font.
+
+            .get("http://example.com/{composer}", "Ludwig van Beethoven")
+
             RequestSpecBuilder builder = new RequestSpecBuilder();
             builder.setBaseUri("http://example.com");
 
@@ -694,7 +697,7 @@ html
       +slide('matrix')
         h2.biggothic.gothicfont.background-title Service Virtualization
 
-        aside(role='note') Light Proxy
+        aside(role='note') Light Proxy, intercepts requests
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -730,7 +733,7 @@ html
             public void should_get_composers_from_composers_microservice() throws URISyntaxException, IOException {
 
                // Given:
-               ComposersGateway composersGateway = new ComposersGateway("192.168.99.100", 8081);
+               ComposersGateway composersGateway = new ComposersGateway("example.com", 8081);
 
                // When:
                Composer composer = composersGateway.getComposer("Ludwig van Beethoven");
@@ -753,7 +756,7 @@ html
                   "request" : {
                     "path" : "/Ludwig van Beethoven",
                     "method" : "GET",
-                    "destination" : "192.168.99.100:8081",
+                    "destination" : "example.com:8081",
                     ...
                   }
                   "response" : {
@@ -920,9 +923,9 @@ html
       +slide
         img.avatar(src='images/profile.jpg')
         br
-        a(href='http://bit.ly/2gLiXEL', style='border:none')
+        a(href='https://github.com/lordofthejars/testing-for-unicorns-slides', style='border:none')
           i.fa.fa-slideshare
-          h3 http://bit.ly/2gLiXEL
+          h3 https://github.com/lordofthejars/testing-for-unicorns-slides
           i.fa.fa-envelope
           h3 asotobu@gmail.com
         div.footer
