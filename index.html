@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Testing For Unicorns</title>
+  <link rel="stylesheet" type="text/css" href="build/build.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <body>
+    <article>
+      <section data-bespoke-backdrop="backdrop backdrop--title" class="title undefined">
+        <aside role="note">Readable, easy to understand/purpose, fun, About composers</aside>
+      </section>
+      <section>
+        <div class="main-wrap">
+          <div class="leftbar">
+            <h2 style="font-size:2em" class="biofont">Alex Soto</h2><br>
+            <h2 style="font-size:1em" class="biofont important">Red Hat Engineer</h2>
+            <h2 style="font-size:1em" class="biofont">Open Source Advocate</h2>
+            <h2 style="font-size:1em" class="biofont important">@alexsotob</h2><img src="images/public.png" style="width:40%">
+          </div>
+          <div class="rightbar"><img src="images/family.jpg" style="width:100%"></div>
+        </div>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--adarise" class="adarise undefined">
+        <h2 class="biggothic gothicfont">Questions</h2>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--kari" class="kari undefined">
+        <h2 class="biggothic gothicfont background-title">Assertions</h2>
+        <aside role="note">Most of tests have them</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">JUnit Test</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_find_composer_by_name() {
+
+    // Given:
+    Composers composers = new Composers();
+    
+    // When:
+    final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
+    
+    // Then:
+    assertEquals("Wolfgang Amadeus Mozart", mozart.getName());
+    assertEquals(Era.CLASSICAL, mozart.getEra());
+    assertEquals(LocalDate.of(1756, 1, 27), mozart.getBirthdate());
+    assertEquals(LocalDate.of(1791, 12, 5), mozart.getDied());
+    
+}
+</code></pre>
+        <aside role="note">Should, GivenWhenThen BDD, assertEquals and collections, Snowball</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--onion" class="onion undefined">
+        <h2 class="biggothic gothicfont background-title">Hamcrest</h2>
+        <aside role="note">Improves readibility, onion</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Hamcrest Test</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
+
+@Test
+public void should_find_composer_by_name() {
+
+    // Given:
+    Composers composers = new Composers();
+    
+    // When:
+    final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
+    
+    // Then:
+    assertThat(mozart.getName(), is(equalToIgnoringWhiteSpace("Wolfgang Amadeus Mozart")));
+    assertThat(mozart.getEra(), is(equalTo(Era.CLASSICAL)));
+    assertThat(mozart.getBirthdate(), is(equalTo(LocalDate.of(1756, 1, 27))));
+    assertThat(mozart.getDied(), is(equalTo(LocalDate.of(1791, 12, 5))));
+    
+}
+</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Hamcrest Test</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+
+@Test
+public void should_find_operas_by_composer_name() {
+    // Given:
+    Composers composers = new Composers();
+    // When:
+    final List<Opera> operas = composers.findOperasByComposerName("Ludwig van Beethoven");
+    
+    // Then:
+    final Opera fidelio = Composers.OperaFactory
+            .createOpera("Fidelio")
+            .language(Language.GERMAN).librettist("Georg Friedrich Treitschke")
+            .roles("Florestan", "Leonore", "Rocco").build();
+            
+    assertThat(operas, hasSize(1));
+    assertThat(getOperaNames(operas), hasItem("Fidelio"));
+    assertThat(operas, hasItem(fidelio));
+}
+</code></pre>
+        <aside role="note">Developers needs to remember, no IDE, depends on equals, snowball</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--train" class="train undefined">
+        <h2 class="biggothic gothicfont background-title">AssertJ</h2>
+        <aside role="note">best of hamcrest and fixes wrong things IDE friendly, DSL approach</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">AssertJ Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">import static org.assertj.core.api.Assertions.assertThat;
+@Test
+public void should_find_composer_by_name() {
+  // Given:
+  Composers composers = new Composers();
+  
+  // When:
+  final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
+  
+  // Then:
+  assertThat(mozart.getName())
+          .isEqualTo("Wolfgang Amadeus Mozart");
+  assertThat(mozart.getBirthdate())
+          .isEqualTo(LocalDate.of(1756, 1, 27));
+          </code><br><code class="bullet bespoke-bullet bespoke-bullet-inactive code-font">&nbsp;&nbsp;assertThat(mozart).isEqualToComparingFieldByField(expectedMozart);
+&nbsp;&nbsp;assertThat(mozart).isEqualToIgnoringNullFields(expectedMozart);
+
+}
+</code></pre>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">AssertJ Collections Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_find_operas_by_composer_name() {
+
+    // Given:
+    Composers composers = new Composers();
+    
+    // When:
+    final List<Opera> operas = composers.findOperasByComposerName("Wolfgang Amadeus Mozart");
+    
+    // Then:
+    assertThat(operas)
+            .hasSize(2)
+            .extracting(Opera::getName)
+            .containsExactlyInAnyOrder("Die Zauberflöte", "Don Giovanni");
+            
+}
+</code></pre>
+        <aside role="note">Still Snowball</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">AssertJ Soft Assertions</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_find_composer_by_name_soft_assertions() {
+
+    // Given:
+    Composers composers = new Composers();
+    
+    // When:
+    final Composer mozart = composers.findComposerByName("Wolfgang Amadeus Mozart");
+    
+    // Then:
+    SoftAssertions.assertSoftly(softly -> {
+        softly.assertThat(mozart.getName()).isEqualTo("Wolfgang Amadeus Mozart");
+        softly.assertThat(mozart.getEra()).isEqualTo(Era.CLASSICAL);
+        softly.assertThat(mozart.getBirthdate()).isEqualTo(LocalDate.of(1756, 1, 27));
+        softly.assertThat(mozart.getDied()).isEqualTo(LocalDate.of(1791, 12, 5));
+    });
+}
+</code></pre>
+        <aside role="note">No snowball</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--eriso" class="eriso undefined">
+        <h2 class="biggothic gothicfont background-title">Things Go Wrong</h2>
+        <aside role="note">Improves readibility</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Try/Catch</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_throw_exception_if_composer_not_found() {
+    // Given:
+    Composers composers = new Composers();
+    
+    // When:
+    try {
+        final Composer salieri = composers.findComposerByName("Antonio Salieri");
+        fail();
+    } catch (IllegalArgumentException e) {
+    
+        // Then:
+        assertEquals("Composer Antonio Salieri is not found", e.getMessage());
+    }
+    
+}
+</code></pre>
+        <aside role="note">Not beautiful</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">JUnit</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test(expected = IllegalArgumentException.class)
+public void should_throw_exception_if_composer_not_found_version_2() {
+    // Given:
+    Composers composers = new Composers();
+    
+    // When:
+    final Composer salieri = composers.findComposerByName("Antonio Salieri");
+    
+}
+</code></pre>
+        <aside role="note">Not know who throws, nor if it is the expected one, break BDD</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">JUnit Rule</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Rule
+public ExpectedException thrown = ExpectedException.none();
+
+@Test
+public void should_throw_exception_if_composer_not_found_version_3() {
+    // Given:
+    Composers composers = new Composers();
+    
+    // When:
+    thrown.expect(IllegalArgumentException.class);
+    final Composer salieri = composers.findComposerByName("Antonio Salieri");
+    
+}
+</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">AssertJ Exceptions</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_throw_exception_if_composer_not_found_version_3() {
+    // Given:
+    Composers composers = new Composers();
+    
+    // When:
+    // Then:
+    assertThatThrownBy(() -> composers.findComposerByName("Antonio Salieri"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .withFailMessage("Composer Antonio Salieri is not found");
+            </code><br><code class="bullet bespoke-bullet bespoke-bullet-inactive code-font">&nbsp;&nbsp;&nbsp;&nbsp;// When:
+&nbsp;&nbsp;&nbsp;&nbsp;Throwable thrown = catchThrowable(() -> composers.findComposerByName("Antonio Salieri"));
+
+&nbsp;&nbsp;&nbsp;&nbsp;// Then:
+&nbsp;&nbsp;&nbsp;&nbsp;assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
+                  .withFailMessage("Composer Antonio Salieri is not found");
+                  </code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont smallgothic underline">Benefits of AssertJ</h2>
+        <ul class="lists">
+          <li>IDE friendly</li>
+          <li>Assertions Generation</li>
+          <li>Integration with Guava, Joda, DB, Neo4j and Swing</li>
+        </ul>
+        <aside role="note">Plugin CLI, Gradle, IDE, Maven</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--sleep" class="sleep undefined">
+        <h2 class="biggothic gothicfont background-title">Don't Sleep</h2>
+        <aside role="note">Not really a unit test but int. test, sleep(500...1000), UI most time, JMS, reactive</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Asynchronous Call</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_play_operas() throws InterruptedException {
+    // Given:
+    final Opera nozzeDiFigaro = ...;
+    Gramophone gramophone = new Gramophone();
+    
+    // When:
+    gramophone.play(nozzeDiFigaro);
+    
+    // Then:
+    TimeUnit.SECONDS.sleep(3);
+    assertThat(gramophone.getCurrentOpera()).isEqualTo(nozzeDiFigaro);
+    
+}
+</code></pre>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--awaitility" class="awaitility undefined">
+        <aside role="note"> Awaitility is a DSL that allows you to express expectations of an asynchronous system</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Awaitility Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_play_operas_version_2() {
+    // Given:
+    final Opera nozzeDiFigaro = Composers.OperaFactory
+            .createOpera("Le Nozze di Figaro")
+            .language(Language.ITALIAN).librettist("Lorenzo Da Ponte")
+            .roles("Count Almaviva", "Countess Rosina", "Susanna", "Figaro")
+            .build();
+            
+    Gramophone gramophone = new Gramophone();
+    
+    // When:
+    gramophone.play(nozzeDiFigaro);
+    
+    // Then:
+    await().atMost(5, TimeUnit.SECONDS).until(gramophone::isPlaying);
+    assertThat(gramophone.getCurrentOpera()).isEqualTo(nozzeDiFigaro);
+    
+}
+</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">JAX-RS Async</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+// public void composersInfoAsync(@Suspended final AsyncResponse asyncResponse,
+//                                @PathParam("composer") String composer) {}
+
+@Test
+public void should_get_composer_and_image_async() {
+    // Then:
+    given().ignoreExceptions()
+            .await().atMost(10, TimeUnit.SECONDS)
+            .until(() -> {
+                    verify(asyncResponse).resume(responseArgumentCaptor.capture());
+            });
+            
+    final ComposersResourceAsync.ComposerInfo composerInfo = responseArgumentCaptor.getValue();
+    assertThat(composerInfo.getImageUrl()).hasHost("localhost")
+            .hasPath("/images/Wolfgang+Amadeus+Mozart.jpg");
+            
+}
+</code></pre>
+        <aside role="note">can mock</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont smallgothic underline">Benefits of Awaitility</h2>
+        <ul class="lists">
+          <li>Deadlock Detection</li>
+          <li>Pollings: Fixed, Fibonacci, Iterative, Custom</li>
+          <li>Simple Library</li>
+        </ul>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--rest" class="rest undefined">
+        <h2 class="biggothic gothicfont background-title">REST API</h2>
+        <aside role="note">REST (Xml, JSon), Move forward to a black box</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">GET /Ludwig+van+Beethoven</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">{
+  "name": "Ludwig van Beethoven",
+  "era": "ROMANTIC",
+  "birthdate": {
+    }
+  },
+  "died": {
+  },
+  "operas": [
+    {
+      "name": "Fidelio",
+      "librettist": "Georg Friedrich Treitschke",
+      "language": "GERMAN",
+      "roles": [
+        "Rocco",
+        "Leonore",
+        "Florestan"
+      ]
+    }
+  ]
+}</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">HttpClient Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_find_composer() throws IOException, URISyntaxException {
+    // Given:
+    URIBuilder uriBuilder = new URIBuilder("http://localhost:8080/");
+    uriBuilder.setPath("Ludwig van Beethoven");
+    
+    // When:
+    final Content bodyContent = Request.Get(uriBuilder.build())
+            .execute().returnContent();
+            
+    String body =  bodyContent.asString();
+    
+    // Then:
+    assertThat(body).contains("\"name\":\"Ludwig van Beethoven\"")
+                    .contains("\"librettist\":\"Georg Friedrich Treitschke\"");
+}
+</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">WebDriver Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">// Given:
+WebDriver browser = new FirefoxDriver();
+URIBuilder uriBuilder = new URIBuilder("http://localhost:8080/");
+uriBuilder.setPath("Ludwig van Beethoven");
+
+browser.navigate().to(uriBuilder.build());
+assertThat(browser.getPageSource()).contains("\"name\":\"Ludwig van Beethoven\"");
+</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--restassured" class="restassured undefined">
+        <aside role="note">Testing and validating REST services</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">REST-assured Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_find_composer() {
+        given()
+            .when()
+              .get("{composer}", "Ludwig van Beethoven")
+            .then()
+              .assertThat()
+                .body("name", is("Ludwig van Beethoven"))
+                .body("operas.size()", is(1))
+                .body("operas.name", hasItems("Fidelio"));
+}
+</code></pre>
+        <aside role="note">GPath</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">REST-assured Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@Test
+public void should_insert_composer() {
+    Composer composer = ....;
+    given()
+          .param("parameter1", "parameterValue")
+          .body(composer)
+    .when()
+          .post()
+          .then()
+            .assertThat()
+            .statusCode(201);
+}
+</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">REST-assured Request Logging</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">given().log().all(). .. // Log all request specification details including parameters, headers, body
+given().log().params(). .. // Log only the parameters of the request
+given().log().body(). .. // Log only the request body
+given().log().headers(). .. // Log only the request headers
+given().log().cookies(). .. // Log only the request cookies
+given().log().method(). .. // Log only the request method
+given().log().path(). .. // Log only the request path
+</code></pre>
+        <aside role="note">Chunks of bytes, maybe not useful at all, just debugging</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">REST-assured Response Logging</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">get("/x").then().log().ifError()
+get("/x").then().log().all()
+given().log().ifValidationFails()
+get("/x").then().log().ifStatusCodeIsEqualTo(302)
+given().config(RestAssured.config()
+                          .logConfig(logConfig().enableLoggingOfRequestAndResponseIfValidationFails())
+)
+</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">REST-assured Request Specification</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">.get("http://example.com/{composer}", "Ludwig van Beethoven")
+
+RequestSpecBuilder builder = new RequestSpecBuilder();
+builder.setBaseUri("http://example.com");
+
+given().spec(builder.build())...</code></pre>
+        <aside role="note">Reuse same configuration across all requests, expectations, path, root, auth, port, host, params, headers</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">REST-assured Auth</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">given().auth().oauth2(accessToken).when()...
+given().auth().form("John", "Doe", springSecurity().withCsrfFieldName("_csrf")).when()...
+given().auth().basic("username", "password").when()...
+</code></pre>
+        <aside role="note">Basic, Digest, Form, CSRF token, OAUTH, Custom</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont smallgothic underline">More Features</h2>
+        <ul class="lists">
+          <li>Custom Parsers</li>
+          <li>SSL support (<span class="important">.relaxedHTTPSValidation()</span>)</li>
+          <li>Filters</li>
+          <li>JSON Schema Validation</li>
+        </ul>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--ants" class="ants undefined">
+        <h2 class="biggothic gothicfont background-title">(Micro) Services Dependencies</h2>
+        <aside role="note">Test code that connect to 3rd party or internal services</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont smallgothic underline">Problems with Services</h2>
+        <ul class="lists">
+          <li>Network Down</li>
+          <li>Service Down</li>
+          <li>Limits on API</li>
+          <li>Component not in Control</li>
+          <li>Micro-Services Dependencies Hell</li>
+        </ul>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont smallgothic underline">Possible Solutions</h2>
+        <ul class="lists">
+          <li>Mock Http Component</li>
+          <li>Stub/Fake Http Server</li>
+          <li>Service Virtualization</li>
+        </ul>
+        <aside role="note">Mock not full stack, not reflect the reality, it is about your knowledge</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--matrix" class="matrix undefined">
+        <h2 class="biggothic gothicfont background-title">Service Virtualization</h2>
+        <aside role="note">Light Proxy, intercepts requests</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section><img src="images/capturemode.png" class="schemash">
+        <aside role="note">first call nothing real service and way back persisted</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section><img src="images/simulatemode.png" class="schemash">
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--hoverfly" class="hoverfly undefined">
+        <aside role="note">Implementation in Go, integrated with Java, connection proxy modification</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Hoverfly Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@ClassRule
+public static HoverflyRule hoverflyRule = HoverflyRule.inCaptureOrSimulationMode("getcomposers.json");
+
+@Test
+public void should_get_composers_from_composers_microservice() throws URISyntaxException, IOException {
+
+   // Given:
+   ComposersGateway composersGateway = new ComposersGateway("example.com", 8081);
+   
+   // When:
+   Composer composer = composersGateway.getComposer("Ludwig van Beethoven");
+   
+   // Then:
+   assertThat(composer.getName()).isEqualTo("Ludwig van Beethoven");
+}</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Hoverfly File Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">{
+  "data" : {
+    "pairs" : [ {
+      "request" : {
+        "path" : "/Ludwig van Beethoven",
+        "method" : "GET",
+        "destination" : "example.com:8081",
+        ...
+      }
+      "response" : {
+        "status" : 200,
+        "body" : "{\"name\":\"Ludwig van Beethoven\",}",
+        "encodedBody" : false,
+        "headers" : {
+          "Connection" : [ "keep-alive" ],
+        ...
+        }
+    }
+  }
+}
+</code></pre>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--burncontainer" class="burncontainer undefined">
+        <h2 class="biggothic gothicfont background-title">Containers are <span class='important'>Burning</span></h2>
+        <aside role="note">Light Proxy</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Testing Containers</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">//assuming Dockerfile or docker-compose already created
+docker build -t myorg/myservice:1.0.0 .
+docker run --rm -ti -p 8080:8080 myorg/myservice:1.0.0
+</code><br><code class="bullet bespoke-bullet bespoke-bullet-inactive">docker-compose up
+</code><br><code class="bullet bespoke-bullet bespoke-bullet-inactive">// Run your test IDE or build tool
+mvn clean test
+</code><br><code class="bullet bespoke-bullet bespoke-bullet-inactive">docker-compose stop
+
+</code></pre>
+        <aside role="note">manual step, although build tool or script not natural to developer, not debug, select exactly test method, IP problems (multiple users)</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--arquilliancube" class="arquilliancube undefined">
+        <aside role="note">JUnit extension, manages everything, suite level, method level, connect to existing, parallel, IP</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Arquillian Cube Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@RunWith(Arquillian.class)
+public class HelloWorldTest {
+
+    @ArquillianResource
+    @DockerUrl(containerName = "helloworld", exposedPort = 8080)
+    RequestSpecBuilder requestSpecBuilder;
+    
+    @Test
+    public void should_receive_ok_message() {
+        RestAssured
+            .given()
+            .spec(requestSpecBuilder.build())
+            .when()
+            .get()
+            .then()
+            .assertThat().body("status", equalTo("OK"));
+    }
+}
+</code></pre>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Arquillian Cube Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@RunWith(Arquillian.class)
+public class HelloWorldTest {
+  @DockerContainer
+  Container pingpong = Container.withContainerName("pingpong")
+                          .fromImage("jonmorehouse/ping-pong")
+                          .withPortBinding(8080)
+                          .build();
+                          
+  @Test
+  public void should_return_ok_as_pong() throws IOException {
+     String response = ping(pingpong.getIpAddress(), pingpong.getBindPort(8080));
+      assertThat(response).containsSequence("OK");
+  }
+}
+</code></pre>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont filegothic">Arquillian Cube K8s Example</h2>
+        <pre class="small language-javascript"><code class="code bullet bespoke-bullet bespoke-bullet-active bespoke-bullet-current code-font">@RunWith(Arquillian.class)
+public class HelloWorldTest {
+
+  @ArquillianResource
+  KubernetesClient client;
+  
+  @Named("hello-world-service")
+  @PortForward
+  @ArquillianResource
+  URL url;
+  
+  @Test
+  public void testRunningPodStaysUp() throws Exception {
+    assertThat(client).deployments().pods().isPodReadyForPeriod();
+  }
+}
+</code></pre>
+        <aside role="note">Ready within a time period (30 seconds by default), then that the pod keeps being Ready for a period (defaults to 10 seconds).</aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--adathink" class="adathink undefined">
+        <h2 class="gothicfont biggothic background-title">Let's <span class='important'>wind down</span></h2>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h2 class="gothicfont smallgothic underline">Conclusions</h2>
+        <ul class="lists">
+          <li>From low-level to high-level</li>
+          <li>Not just for Micro-Services</li>
+          <li>Improves Readibility of Tests</li>
+        </ul>
+        <aside role="note"></aside>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section>
+        <h4><span class='important'>The purpose</span> of automated testing is to <span class='important'>enable change</span>. <br/> <span class='important'>Verifying</span> correctness is just a nice <span class='important'>side-effect</span>.</h4>
+        <h3>Jeremy Norris</h3>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+      <section><img src="images/profile.jpg" class="avatar"><br><a href="https://github.com/lordofthejars/testing-for-unicorns-slides" style="border:none"><i class="fa fa-slideshare"></i>
+          <h3>https://github.com/lordofthejars/testing-for-unicorns-slides</h3><i class="fa fa-envelope"></i>
+          <h3>asotobu@gmail.com</h3></a>
+        <div class="footer"><i class="fa fa-twitter">&nbsp;alexsotob&nbsp;</i><i class="fa fa-github">&nbsp;lordofthejars</i></div>
+      </section>
+    </article>
+    <script src="build/build.js"></script>
+  </body>
+</html>
